@@ -1,11 +1,19 @@
 #include "headers/payoff.h"
 #include <algorithm>
 
-PayOff::PayOff(double Strike_, OptionType TheOptionsType_):Strike(Strike_), TheOptionsType(TheOptionsType_)
+PayOffCall::PayOffCall(double Strike_):Strike(Strike_){}
+double PayOffCall::operator()(double Spot) const
 {
-
+	return std::max(Spot-Strike,0.0);
 }
 
+PayOffPut::PayOffPut(double Strike_):Strike(Strike_){}
+double PayOffPut::operator()(double Spot) const
+{
+	return std::max(Strike-Spot,0.0);
+}
+
+/*
 double PayOff::operator()(double spot) const
 {
 	switch (TheOptionsType)
@@ -20,3 +28,4 @@ double PayOff::operator()(double spot) const
 		    throw("unknown option type found. ");
 	}
 }
+*/
