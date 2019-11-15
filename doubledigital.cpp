@@ -1,7 +1,6 @@
 #include "headers/doubledigital.h"
 
 PayOffDoubleDigital::PayOffDoubleDigital(double Low_, double High_):Low(Low_),High(High_){}
-
 double PayOffDoubleDigital::operator()(double Spot) const
 {
 	if (Spot<=Low)
@@ -9,4 +8,8 @@ double PayOffDoubleDigital::operator()(double Spot) const
 	if (Spot>=High)
 		return 0;
 	return 1;
+}
+PayOff* PayOffDoubleDigital::clone() const
+{
+	return new PayOffDoubleDigital(*this);
 }

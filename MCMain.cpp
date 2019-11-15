@@ -25,6 +25,7 @@ int main()
 	*/
 
 	double T = 1;
+	double K = 110;
 	double Low = 100;
 	double High = 120;
 	double S_O = 110;
@@ -32,10 +33,21 @@ int main()
 	double r = 0.05;
 	unsigned long N = 100000;
 
-	PayOffDoubleDigital thePayOff(Low, High);
-	VanillaOption theOption(thePayOff, T);
-	double result = MonteCarlo(theOption,S_O,vol,r,N);
-	cout << result << endl;
+	PayOffDoubleDigital thePayOffDoubleDigital(Low, High);
+	PayOffCall thePayOffCall(K);
+	PayOffPut thepayOffPut(K);
+
+	VanillaOption theOption1(thePayOffDoubleDigital, T);
+	VanillaOption theOption2(thePayOffCall, T);
+	VanillaOption theOption3(thepayOffPut, T);
+
+	double result1 = MonteCarlo(theOption1,S_O,vol,r,N);
+	double result2 = MonteCarlo(theOption2,S_O,vol,r,N);
+	double result3 = MonteCarlo(theOption3,S_O,vol,r,N);
+	
+	cout << "The Double Digital Price :"<< result1 << endl;
+	cout << "The Call Price           :"<< result2 << endl;
+	cout << "The Put Price            :"<< result3 << endl;
 
 	double tmp;
 	cin >> tmp;
