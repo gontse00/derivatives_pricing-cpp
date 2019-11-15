@@ -1,11 +1,10 @@
 #ifndef MONTECARLO_H
 #define MONTECARLO_H
 
-#include "payoff.h"
+#include "vanilla.h"
 /*Monte Carlo Fuction Declaration*/ 
 double MonteCarlo(
-	const PayOff& thePayOff,
-	double T,
+	const VanillaOption& TheOption,
 	double S_O,
 	double vol,
 	double r,

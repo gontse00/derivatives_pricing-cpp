@@ -7,13 +7,13 @@ using namespace std;
 #endif
 
 double MonteCarlo(
-	const PayOff& thePayOff,
-	double T,
+	const VanillaOption& TheOption,
 	double S_O,
 	double vol,
 	double r,
 	unsigned long N)
 {
+	double T = TheOption.GetExpiry();
 	double variance = vol*vol*T;
 	double rootVariance = sqrt(variance);
 	double itoCorrection = -0.5*variance;
@@ -25,7 +25,7 @@ double MonteCarlo(
 	{
 		double thisGaussian = GetOneGaussianByBoxMuller();
 		thisSpot = movedSpot*exp(rootVariance*thisGaussian);
-		double thisPayOff = thePayOff(thisSpot);
+		double thisPayOff = TheOption.OptionPayOff(thisSpot);
 		runningSum += thisPayOff;
 	}
 	double mean = runningSum/N;
