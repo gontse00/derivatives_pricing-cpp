@@ -24,6 +24,10 @@ public:
 	PayOff(){};
 	virtual double operator()(double Spot) const=0;
 	virtual ~PayOff(){}
+	//Pure Virtual Copy Constructor. We want PayOff to be virtually copyable.
+	//This method makes a copy of itself(PayOff) and returns a pointer to the copy.
+	//it is a pure virtual method so its implemention will be defined in subsequent
+	//inherited classes(PayOffCall,PayOffPut,PayOffDoubleDigital, etc.) 
 	virtual PayOff* clone() const=0;
 
 private:
@@ -35,6 +39,8 @@ public:
 	PayOffCall(double Strike_);
 	virtual double operator()(double Spot) const;
 	virtual ~PayOffCall(){}
+	//Virtual Copy Constructor. We want PayOffCall to be virtually copyable.
+	//This method makes acopy of itself(PayOffCall) and returns a pointer to the copy.
 	virtual PayOff* clone() const;
 
 private:
@@ -47,6 +53,8 @@ public:
 	PayOffPut(double Strike_);
 	virtual double operator()(double Spot) const;
 	virtual ~PayOffPut(){}
+    //Virtual Copy Constructor. We want PayOffCall to be virtually copyable.
+	//This method makes acopy of itself(PayOffCall) and returns a pointer to the copy.
 	virtual PayOff* clone() const;
 
 private:
