@@ -1,5 +1,5 @@
 #include "headers/vanilla.h"
-
+/*
 VanillaOption::VanillaOption(const PayOff& ThePayOff_, double Expiry_):Expiry(Expiry_)
 {
 	ThePayOffPtr = ThePayOff_.clone();
@@ -47,4 +47,20 @@ VanillaOption& VanillaOption::operator=(const VanillaOption& original)
 VanillaOption::~VanillaOption()
 {
 	delete ThePayOffPtr;
+}
+*/
+
+VanillaOption::VanillaOption(const PayOffBridge& ThePayOff_, double Expiry_):ThePayOff(ThePayOff_),Expiry(Expiry_)
+{
+
+}
+
+double VanillaOption::GetExpiry() const
+{
+	return Expiry;
+}
+
+double VanillaOption::OptionPayOff(double Spot) const
+{
+	return ThePayOff(Spot);
 }
