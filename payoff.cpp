@@ -9,6 +9,11 @@ double PayOffCall::operator()(double Spot) const
 PayOff* PayOffCall::clone() const
 {
 	return new PayOffCall(*this);
+	//This line creates a copy of the object for which the clone method has been called,
+	//as the "this" pointer always points to the object bieng called. The call to clone()
+	//is then a call to the copy constructor of PayOffCall which returns a copy of the,
+	//Original payOffCall, and because the operator "new" has been used, we can be sure that
+	//the object will continue to exit.
 } 
 
 PayOffPut::PayOffPut(double Strike_):Strike(Strike_){}
@@ -19,6 +24,11 @@ double PayOffPut::operator()(double Spot) const
 PayOff* PayOffPut::clone() const
 {
 	return new PayOffPut(*this);
+	//This line creates a copy of the object for which the clone method has been called,
+	//as the "this" pointer always points to the object bieng called. The call to clone()
+	//is then a call to the copy constructor of PayOffPut which returns a copy of the,
+	//Original PayOffPut, and because the operator "new" has been used, we can be sure that
+	//the object will continue to exit. 
 }
 
 /*

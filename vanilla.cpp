@@ -19,6 +19,12 @@ VanillaOption::VanillaOption(const VanillaOption& original)
 {
 	Expiry = original.Expiry;
 	ThePayOffPtr = original.ThePayOffPtr->clone();
+
+	//This copy constructor method copies the value of Expiry from the original into the copy.
+	//For the poiter, we call the clone method generating a copy of the PayOff object which we 
+	//store in the copy's pointer. The data of original and its copy with not be equal since the 
+	//pointers will have different values. We do nt want thePayOffPtr to be using the original 
+	//Payoff object. 
 }
 
 VanillaOption& VanillaOption::operator=(const VanillaOption& original)
@@ -30,6 +36,12 @@ VanillaOption& VanillaOption::operator=(const VanillaOption& original)
 		ThePayOffPtr = original.ThePayOffPtr->clone();
 	}
 	return *this;
+	//The 1st thing to notice about the assignment operator is that the return type is of 
+	//VanillaOption&. The 2nd point is that the first thing we do is check against self-assignment.
+	//The rest of the assignment operator is a combination of destructor and copy constructor.
+	//The destructor is needed to get rid of the PayOff object which was owned before. The constructor
+	//part clones the pointed to object so the new version of the assignment part has its own copy 
+	//of the object as desired. 
 }
 
 VanillaOption::~VanillaOption()
