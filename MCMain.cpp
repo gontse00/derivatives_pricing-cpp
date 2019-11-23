@@ -2,6 +2,7 @@
 #include "headers/montecarlo.h"
 #include "headers/doubledigital.h"
 #include "headers/vanilla.h"
+#include "headers/parameters.h"
 using namespace std;
 
 int main()
@@ -24,13 +25,13 @@ int main()
 	cout << resultput << endl;
 	*/
 
-	double T = 1;
+	double T = 1.0;
 	double K = 110;
 	double Low = 100;
 	double High = 120;
-	double S_O = 110;
-	double vol = 0.2;
-	double r = 0.05;
+	double Spot = 110;
+	ParametersConstant VolParam(0.2);
+	ParametersConstant rParam(0.05);
 	unsigned long N = 100000;
 
 	PayOffDoubleDigital thePayOffDoubleDigital(Low, High);
@@ -41,9 +42,9 @@ int main()
 	VanillaOption theOption2(thePayOffCall, T);
 	VanillaOption theOption3(thepayOffPut, T);
 
-	double result1 = MonteCarlo(theOption1,S_O,vol,r,N);
-	double result2 = MonteCarlo(theOption2,S_O,vol,r,N);
-	double result3 = MonteCarlo(theOption3,S_O,vol,r,N);
+	double result1 = MonteCarlo(theOption1,Spot,VolParam,rParam,N);
+	double result2 = MonteCarlo(theOption2,Spot,VolParam,rParam,N);
+	double result3 = MonteCarlo(theOption3,Spot,VolParam,rParam,N);
 	
 	cout << "The Double Digital Price :"<< result1 << endl;
 	cout << "The Call Price           :"<< result2 << endl;

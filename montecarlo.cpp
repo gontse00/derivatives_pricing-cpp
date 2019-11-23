@@ -1,4 +1,5 @@
 #include "headers/montecarlo.h"
+#include "headers/parameters.h"
 #include "headers/random.h"
 #include <cmath>
 
@@ -8,16 +9,16 @@ using namespace std;
 
 double MonteCarlo(
 	const VanillaOption& TheOption,
-	double S_O,
-	double vol,
-	double r,
+	double Spot,
+	const Parameters& Vol,
+	const Parameters& r,
 	unsigned long N)
 {
 	double T = TheOption.GetExpiry();
-	double variance = vol*vol*T;
+	double variance = Vol.IntegralSquare(0.0, T);
 	double rootVariance = sqrt(variance);
 	double itoCorrection = -0.5*variance;
-	double movedSpot = S_O*exp(r*T+itoCorrection);
+	double movedSpot = Spot*exp(r.Integral(0.0,T)+itoCorrection);
 	double thisSpot;
 	double runningSum = 0;
 
@@ -29,6 +30,6 @@ double MonteCarlo(
 		runningSum += thisPayOff;
 	}
 	double mean = runningSum/N;
-	mean += exp(-r*T);
+	mean += exp(-r.Integral(0.0,T));
 	return mean;
 }
