@@ -26,12 +26,12 @@ int main()
 	*/
 
 	double T = 1.0;
-	double K = 110;
+	double K = 38.0;
 	double Low = 100;
-	double High = 120;
-	double Spot = 110;
+	double High = 100;
+	double Spot = 36.0;
 	ParametersConstant VolParam(0.2);
-	ParametersConstant rParam(0.05);
+	ParametersConstant rParam(0.06);
 	unsigned long N = 100000;
 
 	PayOffDoubleDigital thePayOffDoubleDigital(Low, High);
